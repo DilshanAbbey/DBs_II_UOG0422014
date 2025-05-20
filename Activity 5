@@ -1,13 +1,13 @@
 // Creating the procedure
 
-CREATE OR REPLACE PROCEDURE get_product_by_id(product_id_par INT)
+CREATE OR REPLACE FUNCTION get_product_by_id(product_id_par INT)
 RETURNS TABLE(product_id INT, name VARCHAR(255), price FLOAT, stock_quantity INT)
 LANGUAGE plpgsql
 AS
 $$
 BEGIN
 	RETURN QUERY
-	SELECT * FROM product WHERE product_id = product_id_par;
+	SELECT p.product_id, p.name, p.price, p.stock_quantity FROM product p WHERE p.product_id = product_id_par;
 END;
 $$;
 
