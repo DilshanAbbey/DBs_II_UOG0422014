@@ -1,0 +1,21 @@
+// Code for creating a procedure
+
+```
+CREATE PROCEDURE add_numbers(num1 INT, num2 INT)
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	numtotal INT:= 0;
+BEGIN
+	numtotal = num1 + num2;
+	RAISE NOTICE 'The total of the two numbers is: %',numtotal;
+END;
+$$;
+```
+
+// Code for calling the procedure
+
+```
+CALL add_numbers(10, 25);
+```
