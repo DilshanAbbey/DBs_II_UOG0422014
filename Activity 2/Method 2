@@ -1,0 +1,23 @@
+// Creating the procedure
+
+CREATE OR REPLACE PROCEDURE display_full_name(first_name TEXT, last_name TEXT, OUT full_name TEXT)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+	full_name := first_name || ' ' || last_name;
+END;
+$$;
+
+// Program for calling the above procedure
+
+do
+$$
+DECLARE
+	name TEXT;
+BEGIN
+	CALL display_full_name('Rick', 'Ashley', name);
+	RAISE NOTICE 'Full name is %', name;
+END
+$$
+LANGUAGE plpgsql;
