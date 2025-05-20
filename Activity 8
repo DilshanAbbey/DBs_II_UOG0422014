@@ -1,0 +1,22 @@
+// Creating the procedure
+
+CREATE OR REPLACE PROCEDURE calculate_total_stock_value_of_product(p_product_id INT)
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	total_value INT;
+BEGIN
+    SELECT price * stock_quantity
+	INTO total_value
+	FROM product
+	WHERE product_id = p_product_id;
+
+
+	RAISE NOTICE 'Total stock value for product ID % is Rs. %', p_product_id, total_value;
+END;
+$$;
+
+// Calling the procedure
+
+CALL calculate_total_stock_value_of_product(1);
