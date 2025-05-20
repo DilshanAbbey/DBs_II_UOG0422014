@@ -1,0 +1,23 @@
+// Creating the procedure
+
+CREATE OR REPLACE PROCEDURE double_value(INOUT salary INT)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+	salary = salary * 2;
+END;
+$$;
+
+// Program which calls the above procedure
+
+do
+$$
+DECLARE
+	salary INT := 25000;
+BEGIN
+	CALL double_value(salary);
+	RAISE NOTICE 'The salary got doubled upto %',salary;
+END
+$$
+LANGUAGE plpgsql;
