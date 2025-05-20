@@ -1,0 +1,35 @@
+// Creating the procedure
+
+CREATE OR REPLACE PROCEDURE check_stock_category(p_product_id INT)
+LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	quantity INT;
+BEGIN
+    SELECT stock_quantity
+	INTO quantity
+	FROM product
+	WHERE product_id = p_product_id;
+
+
+	RAISE NOTICE 'The stock quantity for product id % is %', p_product_id, quantity;
+
+	CASE
+		WHEN quantity < 10 THEN
+			RAISE NOTICE 'Low Stock';
+		WHEN quantity BETWEEN 10 AND 50 THEN
+			RAISE NOTICE 'Moderate Stock';
+		WHEN quantity > 55 THEN
+			RAISE NOTICE 'High Stock';
+		ELSE
+			RAISE NOTICE 'Invalid';
+	END CASE;
+END;
+$$;
+
+// Calling the procedure
+
+CALL check_stock_category(1);
+
+
