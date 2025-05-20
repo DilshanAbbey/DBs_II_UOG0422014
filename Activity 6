@@ -1,0 +1,18 @@
+// Creating the procedure
+
+CREATE OR REPLACE PROCEDURE update_product_stock(p_product_id INT, new_product_name VARCHAR(255), new_price FLOAT, new_stock_quantity INT)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    UPDATE product
+    SET name = new_product_name, price = new_price, stock_quantity = new_stock_quantity
+    WHERE product_id = p_product_id;
+
+    RAISE NOTICE 'Stock updated for product ID %', p_product_id;
+END;
+$$;
+
+// Calling the procedure
+
+CALL update_product_stock(1, 'Halloween Costume', 35000.00, 20);
